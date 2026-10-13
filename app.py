@@ -951,6 +951,7 @@ def register_bot():
                 )
             
             # User Success Reply Format
+            # User Success Reply Format
             reply_text = (
                 "╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\n"
                 "┃     ✅ 𝗥𝗘𝗚𝗜𝗦𝗧𝗘𝗥 𝗦𝗨𝗖𝗖𝗘𝗦𝗦‼️\n"
@@ -974,9 +975,11 @@ def register_bot():
                 "text": reply_text,
             }
             try:
-                requests.post(url, json=payload, timeout=5)
-            except Exception:
-                pass
+                response = requests.post(url, json=payload, timeout=5)
+                # I-print sa logs kung nagtagumpay o may error mula sa Telegram API
+                print("Telegram API Response:", response.status_code, response.text)
+            except Exception as e:
+                print(f"Telegram reply error: {e}")
 
     return "OK", 200
 
