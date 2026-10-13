@@ -30,7 +30,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
 OWNER_ID = os.getenv("OWNER_ID")
 
 # Register Notification Bot (New)
-REGISTER_BOT_TOKEN = "8848387971:AAHk5zM22c_CHYPhOH6Ks35bb90J5uUyTww"
+REGISTER_BOT_TOKEN = "8848387971:AAF_6SWJL-x7YojRY7SdPuVOWEUlletSXEA"
 REGISTER_OWNER_ID = "7201369115"
 
 DB_URL_INJECTOR = os.getenv("DATABASE_URL_INJECTOR") or os.getenv("DATABASE_URL")
@@ -341,7 +341,7 @@ def handle_verify(db_type):
             cur.execute("SELECT * FROM device_links WHERE device_id = %s;", (device,))
             link_data = cur.fetchone()
 
-            bot_username = "@KazeRegister1Bot"
+            bot_username = "KazeRegisterBot"
             bot_link = f"https://t.me/{bot_username}?start={device}"
 
             if not link_data or not link_data.get("chat_id"):
@@ -866,11 +866,10 @@ def clear_devices():
     except Exception as e:
         return f"Error: {e}", 500
 
+
 # ======================
 # NEW REGISTRATION WEBHOOK (Para sa @KazeRegisterBot)
 # ======================
-REGISTER_BOT_TOKEN = "8720201422:AAFQSzQTGkzvRXXRM8U06Tji4gXnuA3Ncfk"
-
 @app.route('/register_webhook', methods=['POST'])
 def register_bot():
     data = request.json
@@ -929,6 +928,7 @@ def register_bot():
                 ph_time = datetime.now(timezone(timedelta(hours=8)))
                 current_time_str = ph_time.strftime("%B %d, %Y — %I:%M %p")
                 
+
                 # Admin Notification Format
                 send_register_alert(
                     f"╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\n"
@@ -974,10 +974,9 @@ def register_bot():
                 "text": reply_text,
             }
             try:
-                response = requests.post(url, json=payload, timeout=5)
-                print("Telegram API Response:", response.status_code, response.text)
-            except Exception as e:
-                print(f"Telegram reply error: {e}")
+                requests.post(url, json=payload, timeout=5)
+            except Exception:
+                pass
 
     return "OK", 200
 
