@@ -341,7 +341,7 @@ def handle_verify(db_type):
             cur.execute("SELECT * FROM device_links WHERE device_id = %s;", (device,))
             link_data = cur.fetchone()
 
-            bot_username = "KazeRegisterBot"
+            bot_username = "@KazeRegister1Bot"
             bot_link = f"https://t.me/{bot_username}?start={device}"
 
             if not link_data or not link_data.get("chat_id"):
@@ -869,7 +869,7 @@ def clear_devices():
 # ======================
 # NEW REGISTRATION WEBHOOK (Para sa @KazeRegisterBot)
 # ======================
-REGISTER_BOT_TOKEN = "8848387971:AAF_6SWJL-x7YojRY7SdPuVOWEUlletSXEA"
+REGISTER_BOT_TOKEN = "8720201422:AAFQSzQTGkzvRXXRM8U06Tji4gXnuA3Ncfk"
 
 @app.route('/register_webhook', methods=['POST'])
 def register_bot():
