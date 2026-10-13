@@ -866,10 +866,11 @@ def clear_devices():
     except Exception as e:
         return f"Error: {e}", 500
 
-
 # ======================
 # NEW REGISTRATION WEBHOOK (Para sa @KazeRegisterBot)
 # ======================
+REGISTER_BOT_TOKEN = "8848387971:AAF_6SWJL-x7YojRY7SdPuVOWEUlletSXEA"
+
 @app.route('/register_webhook', methods=['POST'])
 def register_bot():
     data = request.json
@@ -928,7 +929,6 @@ def register_bot():
                 ph_time = datetime.now(timezone(timedelta(hours=8)))
                 current_time_str = ph_time.strftime("%B %d, %Y — %I:%M %p")
                 
-
                 # Admin Notification Format
                 send_register_alert(
                     f"╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\n"
@@ -950,7 +950,6 @@ def register_bot():
                     f"🤖 𝗔𝗨𝗧𝗢𝗠𝗔𝗧𝗘𝗗 𝗡𝗢𝗧𝗜𝗙𝗜𝗖𝗔𝗧𝗜𝗢𝗡"
                 )
             
-            # User Success Reply Format
             # User Success Reply Format
             reply_text = (
                 "╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\n"
@@ -976,7 +975,6 @@ def register_bot():
             }
             try:
                 response = requests.post(url, json=payload, timeout=5)
-                # I-print sa logs kung nagtagumpay o may error mula sa Telegram API
                 print("Telegram API Response:", response.status_code, response.text)
             except Exception as e:
                 print(f"Telegram reply error: {e}")
